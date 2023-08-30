@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol NFGroupDetailViewControllerDelegate: NSObjectProtocol {
+    func groupDetailViewController(_ viewController: NFGroupDetailViewController, didUpdateDetailsOf group: NFGroup)
+}
+
 final class NFGroupDetailViewController: UITableViewController {
     // MARK: - Properties
     private var group: NFGroup
@@ -18,6 +22,8 @@ final class NFGroupDetailViewController: UITableViewController {
         }
     }
     private var updatedGroup: NFGroup
+    weak var delegate: NFGroupDetailViewControllerDelegate?
+    private var shouldEditTitle: Bool
     
     
     // MARK: - Views
@@ -45,7 +51,8 @@ final class NFGroupDetailViewController: UITableViewController {
         guard groupHasChanges else { return }
         group = updatedGroup
         groupHasChanges = false
-        tableView.reloadData()
+        delegate?.groupDetailViewController(self, didUpdateDetailsOf: group)
+        tableView.reloadSections(.init(integer: .zero), with: .automatic)
         navigationController?.popViewController(animated: true)
     }
     private func configNavigationBar() {
@@ -79,11 +86,19 @@ final class NFGroupDetailViewController: UITableViewController {
     required init(group: NFGroup) {
         self.group = group
         self.updatedGroup = group
+        shouldEditTitle = false
+        super.init(style: .insetGrouped)
+    }
+    required init() {
+        self.group = NFGroup(id: UUID().uuidString, title: "Untitled Group", date: .now, items: [])
+        self.updatedGroup = group
+        shouldEditTitle = true
         super.init(style: .insetGrouped)
     }
     required init?(coder: NSCoder) {
-        group = .init(id: "", title: "", date: .init(), items: [])
+        group = .init(id: UUID().uuidString, title: "Untitled Group", date: .now, items: [])
         updatedGroup = group
+        shouldEditTitle = true
         super.init(coder: coder)
     }
 }
@@ -101,7 +116,14 @@ extension NFGroupDetailViewController {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseIdentifier)
         guard let detailHeaderView = headerView as? NFGroupDetailHeaderView else { return headerView }
         detailHeaderView.delegate = self
-        detailHeaderView.updateGroup(title: updatedGroup.title, date: updatedGroup.date)
+        if shouldEditTitle {
+            detailHeaderView.titleTextView.text = nil
+            detailHeaderView.titleTextView.setMarkedText(group.title, selectedRange: .init(location: group.title.count, length: 0))
+            detailHeaderView.titleTextView.becomeFirstResponder()
+            shouldEditTitle = false
+        } else {
+            detailHeaderView.updateGroup(title: updatedGroup.title, date: updatedGroup.date, alerts: updatedGroup.alerts)
+        }
         return detailHeaderView
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,7 +176,7 @@ extension NFGroupDetailViewController: NFGroupDetailHeaderViewDelegate {
             updatedGroup.alerts = value
         }
         updateSaveItemIfNeeded()
-        tableView.reloadData()
+        tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }
 
@@ -177,7 +199,7 @@ extension NFGroupDetailViewController: NFTextTableViewCellDelegate {
             }
         }
         updateSaveItemIfNeeded()
-        tableView.reloadData()
+        tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }
 

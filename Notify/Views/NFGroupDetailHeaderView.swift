@@ -23,7 +23,7 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     
     
     // MARK: - Views
-    private let titleTextView: UITextView = {
+    let titleTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = .boldSystemFont(ofSize: 28)
@@ -53,9 +53,10 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     
     
     // MARK: - Configurations
-    func updateGroup(title: String, date: Date) {
+    func updateGroup(title: String, date: Date, alerts: Bool) {
         titleTextView.text = title
         datePicker.date = date
+        notificationSwitch.setOn(alerts, animated: true)
     }
     private func configViews() {
         titleTextView.delegate = self

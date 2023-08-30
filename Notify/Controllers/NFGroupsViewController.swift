@@ -9,7 +9,7 @@ import UIKit
 
 class NFGroupsViewController: UITableViewController {
     // MARK: - Properties
-    private var groups: [NFGroup] = NFGroup.mockData //[]
+    private var groups: [NFGroup] = []
     private let cellReuseIdentifier = "default-cell"
     
     
@@ -31,6 +31,11 @@ class NFGroupsViewController: UITableViewController {
     }
     private func configNavigationBar() {
         title = "Groups"
+        navigationItem.setRightBarButton(UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { _ in
+            let newGroupVC = NFGroupDetailViewController()
+            newGroupVC.delegate = self
+            self.navigationController?.pushViewController(newGroupVC, animated: true)
+        })), animated: true)
     }
     
     
@@ -61,12 +66,38 @@ extension NFGroupsViewController {
         }
         return cell
     }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete, groups.count > indexPath.row else { return }
+        groups.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
     
     // MARK: Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard groups.count > indexPath.row else { return }
         let detailsVC = NFGroupDetailViewController(group: groups[indexPath.row])
+        detailsVC.delegate = self
         navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .delete
+    }
+}
+
+
+// MARK: - DetailsView
+extension NFGroupsViewController: NFGroupDetailViewControllerDelegate {
+    func groupDetailViewController(_ viewController: NFGroupDetailViewController, didUpdateDetailsOf group: NFGroup) {
+        if let index = groups.firstIndex(where: { $0.id == group.id }) {
+            groups.remove(at: index)
+            groups.insert(group, at: index)
+        } else {
+            groups.insert(group, at: .zero)
+        }
+        tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }
