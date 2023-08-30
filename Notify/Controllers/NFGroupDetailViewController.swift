@@ -58,7 +58,9 @@ final class NFGroupDetailViewController: UITableViewController {
         configToolbar()
     }
     private func addNewItem() {
-        tableView.scrollToRow(at: .init(row: .zero, section: .zero), at: .top, animated: false)
+        if tableView.numberOfRows(inSection: .zero) > .zero {
+            tableView.scrollToRow(at: .init(row: .zero, section: .zero), at: .top, animated: false)
+        }
         let newItem = NFCoreDataService.shared.createNewGroupItem()
         group?.insertIntoItems(newItem, at: .zero)
         let firstIndexPath = IndexPath(row: .zero, section: .zero)
