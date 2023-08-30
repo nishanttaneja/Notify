@@ -13,10 +13,10 @@ protocol NFGroupDetailViewControllerDelegate: NSObjectProtocol {
 
 final class NFGroupDetailViewController: UITableViewController {
     // MARK: - Properties
-    private var group: NFGroup
+    private let groupId: String
+    private var group: NFCDGroup?
     private let headerReuseIdentifier = "default-header"
     private let cellReuseIdentifier = "default-cell"
-    private var updatedGroup: NFGroup
     weak var delegate: NFGroupDetailViewControllerDelegate?
     private var shouldEditTitle: Bool
     
@@ -29,7 +29,7 @@ final class NFGroupDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configViews()
-        NFCoreDataService.shared.fetchGroup(havingId: group.id) { result in
+        NFCoreDataService.shared.fetchGroup(havingId: groupId) { result in
             switch result {
             case .success(let group):
                 DispatchQueue.main.async {
@@ -43,10 +43,10 @@ final class NFGroupDetailViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if updatedGroup.alerts {
-            NFNotificationManager.shared.setReminder(id: updatedGroup.id, date: updatedGroup.date, message: updatedGroup.items.randomElement()?.title ?? updatedGroup.title)
+        if let group, group.alerts, let id = group.groupId, let date = group.date, let message = (group.items?.array.randomElement() as? NFCDGroupItem)?.title {
+            NFNotificationManager.shared.setReminder(id: id, date: date, message: message)
         }
-        NFCoreDataService.shared.insertGroup(updatedGroup) { result in
+        NFCoreDataService.shared.saveData { result in
             switch result {
             case .success: break
             case .failure(let failure):
@@ -61,24 +61,9 @@ final class NFGroupDetailViewController: UITableViewController {
         configItemsListView()
         configToolbar()
     }
-    private func performSaveAction() {
-        NFCoreDataService.shared.insertGroup(updatedGroup) { result in
-            switch result {
-            case .success(let group):
-                DispatchQueue.main.async {
-                    self.group = group
-                    self.delegate?.groupDetailViewController(self, didUpdateDetailsOf: group)
-                    self.tableView.reloadSections(.init(integer: .zero), with: .automatic)
-                    self.navigationController?.popViewController(animated: true)
-                }
-            case .failure(let failure):
-                debugPrint(#function, failure)
-            }
-        }
-    }
     private func addNewItem() {
-        let newItem = NFGroupItem(id: UUID().uuidString, title: "")
-        updatedGroup.items.insert(newItem, at: .zero)
+        let newItem = NFCoreDataService.shared.createNewGroupItem()
+        group?.insertIntoItems(newItem, at: .zero)
         let firstIndexPath = IndexPath(row: .zero, section: .zero)
         tableView.insertRows(at: [firstIndexPath], with: .automatic)
         guard let textCell = tableView.cellForRow(at: firstIndexPath) as? NFTextTableViewCell else { return }
@@ -97,21 +82,20 @@ final class NFGroupDetailViewController: UITableViewController {
     
     
     // MARK: - Constructors
-    required init(group: NFGroup) {
-        self.group = group
-        self.updatedGroup = group
+    required init(groupId: String) {
+        self.groupId = groupId
         shouldEditTitle = false
         super.init(style: .insetGrouped)
     }
     required init() {
-        self.group = NFGroup(id: UUID().uuidString, title: "Untitled Group", date: .now, items: [])
-        self.updatedGroup = group
+        let newGroup = NFCoreDataService.shared.createNewGroup()
+        self.groupId = newGroup.groupId ?? ""
         shouldEditTitle = true
         super.init(style: .insetGrouped)
     }
     required init?(coder: NSCoder) {
-        group = .init(id: UUID().uuidString, title: "Untitled Group", date: .now, items: [])
-        updatedGroup = group
+        let newGroup = NFCoreDataService.shared.createNewGroup()
+        self.groupId = newGroup.groupId ?? ""
         shouldEditTitle = true
         super.init(coder: coder)
     }
@@ -128,42 +112,37 @@ extension NFGroupDetailViewController {
     // MARK: DataSource
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseIdentifier)
-        guard let detailHeaderView = headerView as? NFGroupDetailHeaderView else { return headerView }
+        guard let group, let detailHeaderView = headerView as? NFGroupDetailHeaderView else { return headerView }
         detailHeaderView.delegate = self
         if shouldEditTitle {
             detailHeaderView.titleTextView.text = nil
-            detailHeaderView.titleTextView.setMarkedText(group.title, selectedRange: .init(location: group.title.count, length: 0))
+            detailHeaderView.titleTextView.setMarkedText(group.title, selectedRange: .init(location: group.title?.count ?? .zero, length: 0))
             detailHeaderView.titleTextView.becomeFirstResponder()
             shouldEditTitle = false
         } else {
-            detailHeaderView.updateGroup(title: updatedGroup.title, date: updatedGroup.date, alerts: updatedGroup.alerts)
+            detailHeaderView.updateGroup(title: group.title, date: group.date, alerts: group.alerts)
         }
         return detailHeaderView
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        updatedGroup.items.count
+        group?.items?.count ?? .zero
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-        guard let textCell = cell as? NFTextTableViewCell, updatedGroup.items.count > indexPath.row else { return cell }
+        guard let textCell = cell as? NFTextTableViewCell, let items = group?.items?.array as? [NFCDGroupItem], items.count > indexPath.row else { return cell }
         textCell.delegate = self
-        textCell.updateText(updatedGroup.items[indexPath.row].title)
+        textCell.updateText(items[indexPath.row].title)
         return textCell
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        guard updatedGroup.items.count > indexPath.row else { return }
-        let item = updatedGroup.items.remove(at: indexPath.row)
-        NFCoreDataService.shared.deleteGroupItem(item) { result in
-            switch result {
-            case .success: break
-            case .failure(let failure):
-                debugPrint(#function, failure)
-            }
-        }
+        guard editingStyle == .delete,
+              let group, let items = group.items?.array as? [NFCDGroupItem], items.count > indexPath.row else { return }
+        let item = items[indexPath.row]
+        NFCoreDataService.shared.viewContext.delete(item)
+        group.removeFromItems(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -175,11 +154,12 @@ extension NFGroupDetailViewController {
         .delete
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard indexPath.row < updatedGroup.items.count else { return UITableView.automaticDimension }
-        return updatedGroup.items[indexPath.row].title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+16
+        guard let group, let items = group.items?.array as? [NFCDGroupItem],
+              indexPath.row < items.count, let title = items[indexPath.row].title else { return UITableView.automaticDimension }
+        return title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+16
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        updatedGroup.title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+62
+        (group?.title ?? "").getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+62
     }
 }
 
@@ -189,11 +169,11 @@ extension NFGroupDetailViewController: NFGroupDetailHeaderViewDelegate {
     func groupDetailHeaderView(_ headerView: NFGroupDetailHeaderView, didUpdate property: NFGroupDetailHeaderProperty) {
         switch property {
         case .title(let value):
-            updatedGroup.title = value
+            group?.title = value
         case .date(let value):
-            updatedGroup.date = value
+            group?.date = value
         case .alerts(let value):
-            updatedGroup.alerts = value
+            group?.alerts = value
         }
         tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
@@ -207,24 +187,15 @@ extension NFGroupDetailViewController: NFTextTableViewCellDelegate {
         switch property {
         case .title(let value):
             guard value.replacingOccurrences(of: " ", with: "").isEmpty == false else {
-                updatedGroup.items.remove(at: .zero)
+                group?.removeFromItems(at: .zero)
                 tableView.deleteRows(at: [.init(row: .zero, section: .zero)], with: .automatic)
                 return
             }
-            let newItem: NFGroupItem
-            if updatedGroup.items.count > index {
-                updatedGroup.items[index].title = value
-                newItem = updatedGroup.items[index]
+            if let items = group?.items?.array as? [NFCDGroupItem], items.count > index {
+                items[index].title = value
             } else {
-                newItem = .init(id: UUID().uuidString, title: value)
-                updatedGroup.items.insert(newItem, at: .zero)
-            }
-            NFCoreDataService.shared.insertGroupItem(newItem, inGroupHavingId: updatedGroup.id) { result in
-                switch result {
-                case .success: break
-                case .failure(let failure):
-                    debugPrint(#function, failure)
-                }
+                let newItem = NFCoreDataService.shared.createNewGroupItem()
+                group?.insertIntoItems(newItem, at: .zero)
             }
         }
         tableView.reloadSections(.init(integer: .zero), with: .automatic)

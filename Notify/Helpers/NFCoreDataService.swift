@@ -36,7 +36,7 @@ extension NFCoreDataService {
             let savedGroups = try viewContext.fetch(fetchRequest)
             let groupsToDisplay: [NFGroup] = savedGroups.compactMap { savedGroup in
                 guard let id = savedGroup.groupId, let title = savedGroup.title, let date = savedGroup.date else { return nil }
-                let items: [NFGroupItem] = (savedGroup.items?.allObjects as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
+                let items: [NFGroupItem] = (savedGroup.items?.array as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
                     guard let id = savedItem.itemId, let title = savedItem.title else { return nil }
                     return NFGroupItem(id: id, title: title)
                 })
@@ -54,7 +54,7 @@ extension NFCoreDataService {
             guard let savedGroup = try viewContext.fetch(fetchRequest).first,
                   let id = savedGroup.groupId, let title = savedGroup.title, let date = savedGroup.date
             else { throw NFCDError.notFound }
-            let items: [NFGroupItem] = (savedGroup.items?.allObjects as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
+            let items: [NFGroupItem] = (savedGroup.items?.array as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
                 guard let id = savedItem.itemId, let title = savedItem.title else { return nil }
                 return NFGroupItem(id: id, title: title)
             })
@@ -63,6 +63,42 @@ extension NFCoreDataService {
         } catch let error {
             completionHandler(.failure(error))
         }
+    }
+    func fetchGroup(havingId id: String, completionHandler: @escaping (_ result: Result<NFCDGroup, Error>) -> Void) {
+        do {
+            let fetchRequest = NFCDGroup.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(NFCDGroup.groupId), id)
+            guard let savedGroup = try viewContext.fetch(fetchRequest).first else { throw NFCDError.notFound }
+            completionHandler(.success(savedGroup))
+        } catch let error {
+            completionHandler(.failure(error))
+        }
+    }
+    func saveData(completionHandler: @escaping (_ result: Result<Bool, Error>) -> Void) {
+        do {
+            if viewContext.hasChanges {
+                try viewContext.save()
+                completionHandler(.success(true))
+            } else {
+                completionHandler(.success(false))
+            }
+        } catch let error {
+            completionHandler(.failure(error))
+        }
+    }
+    func createNewGroup() -> NFCDGroup {
+        let group = NFCDGroup(context: viewContext)
+        group.groupId = UUID().uuidString
+        group.title = "Untitled Group"
+        group.alerts = false
+        group.date = .now
+        return group
+    }
+    func createNewGroupItem() -> NFCDGroupItem {
+        let item = NFCDGroupItem(context: viewContext)
+        item.itemId = UUID().uuidString
+        item.title = ""
+        return item
     }
     func insertGroup(_ group: NFGroup, completionHandler: @escaping (_ result: Result<NFGroup, Error>) -> Void) {
         do {

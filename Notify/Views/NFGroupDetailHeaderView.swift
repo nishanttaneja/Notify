@@ -54,9 +54,9 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     
     
     // MARK: - Configurations
-    func updateGroup(title: String, date: Date, alerts: Bool) {
+    func updateGroup(title: String?, date: Date?, alerts: Bool) {
         titleTextView.text = title
-        datePicker.date = date
+        datePicker.date = date ?? .now
         notificationSwitch.setOn(alerts, animated: true)
     }
     private func configViews() {

@@ -31,7 +31,7 @@ final class NFTextTableViewCell: UITableViewCell {
     
     
     // MARK: - Configurations
-    func updateText(_ text: String) {
+    func updateText(_ text: String?) {
         textView.text = text
     }
     private func configViews() {

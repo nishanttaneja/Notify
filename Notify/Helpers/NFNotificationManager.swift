@@ -19,6 +19,7 @@ final class NFNotificationManager {
         }
     }
     func setReminder(id: String, date: Date, message: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "Notify"
         notificationContent.body = message

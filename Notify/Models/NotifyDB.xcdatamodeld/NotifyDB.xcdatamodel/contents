@@ -5,7 +5,7 @@
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="groupId" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NFCDGroupItem" inverseName="group" inverseEntity="NFCDGroupItem"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="NFCDGroupItem" inverseName="group" inverseEntity="NFCDGroupItem"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="groupId"/>

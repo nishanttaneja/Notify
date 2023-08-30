@@ -93,7 +93,7 @@ extension NFGroupsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard groups.count > indexPath.row else { return }
-        let detailsVC = NFGroupDetailViewController(group: groups[indexPath.row])
+        let detailsVC = NFGroupDetailViewController(groupId: groups[indexPath.row].id)
         detailsVC.delegate = self
         navigationController?.pushViewController(detailsVC, animated: true)
     }
