@@ -28,6 +28,7 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
         textView.backgroundColor = .clear
         textView.font = .boldSystemFont(ofSize: 28)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.addDoneToolbarButton()
         return textView
     }()
     private let datePicker = UIDatePicker()

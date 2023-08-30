@@ -18,6 +18,8 @@
 		B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D72A9F086D00D89804 /* UIView+Extension.swift */; };
 		B47093DA2A9F09E600D89804 /* NFGroupDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */; };
 		B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */; };
+		B47093DE2A9F3C3300D89804 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DD2A9F3C3300D89804 /* UITextView+Extension.swift */; };
+		B47093E02A9F3C4100D89804 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DF2A9F3C4100D89804 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		B47093D72A9F086D00D89804 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroupDetailHeaderView.swift; sourceTree = "<group>"; };
 		B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTextTableViewCell.swift; sourceTree = "<group>"; };
+		B47093DD2A9F3C3300D89804 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		B47093DF2A9F3C4100D89804 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				B47093D72A9F086D00D89804 /* UIView+Extension.swift */,
+				B47093DD2A9F3C3300D89804 /* UITextView+Extension.swift */,
+				B47093DF2A9F3C4100D89804 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B47093DA2A9F09E600D89804 /* NFGroupDetailHeaderView.swift in Sources */,
+				B47093E02A9F3C4100D89804 /* String+Extension.swift in Sources */,
 				B47093BD2A9F014600D89804 /* NFGroupsViewController.swift in Sources */,
 				B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */,
+				B47093DE2A9F3C3300D89804 /* UITextView+Extension.swift in Sources */,
 				B47093CF2A9F02F900D89804 /* NFCreateGroupViewController.swift in Sources */,
 				B47093CD2A9F02EE00D89804 /* NFGroupDetailViewController.swift in Sources */,
 				B47093B92A9F014600D89804 /* AppDelegate.swift in Sources */,

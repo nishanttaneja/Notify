@@ -25,6 +25,7 @@ final class NFTextTableViewCell: UITableViewCell {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = .systemFont(ofSize: 17)
+        textView.addDoneToolbarButton()
         return textView
     }()
     
