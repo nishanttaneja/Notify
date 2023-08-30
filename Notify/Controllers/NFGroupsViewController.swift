@@ -32,6 +32,10 @@ class NFGroupsViewController: UITableViewController {
             }
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NFNotificationManager.shared.requestNotificationAuthorisation()
+    }
     
     
     // MARK: - Configurations

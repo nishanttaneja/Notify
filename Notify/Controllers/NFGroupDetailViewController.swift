@@ -43,6 +43,9 @@ final class NFGroupDetailViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if updatedGroup.alerts {
+            NFNotificationManager.shared.setReminder(id: updatedGroup.id, date: updatedGroup.date, message: updatedGroup.items.randomElement()?.title ?? updatedGroup.title)
+        }
         NFCoreDataService.shared.insertGroup(updatedGroup) { result in
             switch result {
             case .success: break

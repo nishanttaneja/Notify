@@ -25,6 +25,7 @@
 		B4F2E2582A9F49FF009A7892 /* NFCDGroupItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2E2542A9F49FF009A7892 /* NFCDGroupItem+CoreDataProperties.swift */; };
 		B4F2E2592A9F49FF009A7892 /* NFCDGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2E2552A9F49FF009A7892 /* NFCDGroup+CoreDataClass.swift */; };
 		B4F2E25A2A9F49FF009A7892 /* NFCDGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2E2562A9F49FF009A7892 /* NFCDGroup+CoreDataProperties.swift */; };
+		B4F2E25C2A9F4C31009A7892 /* NFNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2E25B2A9F4C31009A7892 /* NFNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		B4F2E2542A9F49FF009A7892 /* NFCDGroupItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCDGroupItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B4F2E2552A9F49FF009A7892 /* NFCDGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCDGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B4F2E2562A9F49FF009A7892 /* NFCDGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NFCDGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B4F2E25B2A9F4C31009A7892 /* NFNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			children = (
 				B47093D62A9F086500D89804 /* Extensions */,
 				B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */,
+				B4F2E25B2A9F4C31009A7892 /* NFNotificationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				B4F2E2572A9F49FF009A7892 /* NFCDGroupItem+CoreDataClass.swift in Sources */,
 				B47093E52A9F3F4000D89804 /* NFCoreDataService.swift in Sources */,
 				B47093BD2A9F014600D89804 /* NFGroupsViewController.swift in Sources */,
+				B4F2E25C2A9F4C31009A7892 /* NFNotificationManager.swift in Sources */,
 				B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */,
 				B47093DE2A9F3C3300D89804 /* UITextView+Extension.swift in Sources */,
 				B47093CD2A9F02EE00D89804 /* NFGroupDetailViewController.swift in Sources */,
