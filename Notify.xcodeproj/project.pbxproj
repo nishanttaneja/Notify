@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B438AD232A9F924500616CDB /* WhatsNew in Frameworks */ = {isa = PBXBuildFile; productRef = B438AD222A9F924500616CDB /* WhatsNew */; };
 		B47093B92A9F014600D89804 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093B82A9F014600D89804 /* AppDelegate.swift */; };
 		B47093BB2A9F014600D89804 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093BA2A9F014600D89804 /* SceneDelegate.swift */; };
 		B47093BD2A9F014600D89804 /* NFGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093BC2A9F014600D89804 /* NFGroupsViewController.swift */; };
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B438AD232A9F924500616CDB /* WhatsNew in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +164,9 @@
 			dependencies = (
 			);
 			name = Notify;
+			packageProductDependencies = (
+				B438AD222A9F924500616CDB /* WhatsNew */,
+			);
 			productName = Notify;
 			productReference = B47093B52A9F014600D89804 /* Notify.app */;
 			productType = "com.apple.product-type.application";
@@ -190,6 +195,9 @@
 				Base,
 			);
 			mainGroup = B47093AC2A9F014600D89804;
+			packageReferences = (
+				B438AD212A9F924500616CDB /* XCRemoteSwiftPackageReference "WhatsNew" */,
+			);
 			productRefGroup = B47093B62A9F014600D89804 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -382,7 +390,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nishanttaneja.Notify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -412,7 +420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nishanttaneja.Notify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -446,6 +454,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B438AD212A9F924500616CDB /* XCRemoteSwiftPackageReference "WhatsNew" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nishanttaneja/WhatsNew";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B438AD222A9F924500616CDB /* WhatsNew */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B438AD212A9F924500616CDB /* XCRemoteSwiftPackageReference "WhatsNew" */;
+			productName = WhatsNew;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B47093E12A9F3CC600D89804 /* NotifyDB.xcdatamodeld */ = {

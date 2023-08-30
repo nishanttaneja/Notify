@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WhatsNew
 
 class NFGroupsViewController: UITableViewController {
     // MARK: - Properties
@@ -35,6 +36,7 @@ class NFGroupsViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NFNotificationManager.shared.requestNotificationAuthorisation()
+        displayWhatsNew()
     }
     
     
@@ -104,5 +106,18 @@ extension NFGroupsViewController {
     }
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .delete
+    }
+}
+
+
+// MARK: - WhatsNew
+extension NFGroupsViewController {
+    private func displayWhatsNew() {
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+        let controller = WNViewController(items: [
+            WNItem(image: .init(systemName: "newspaper")!, title: "What's New", description: "Discover new features. When new features are added, they will be displayed here.")
+        ], appVersion: appVersion)
+        guard controller.shouldDisplayWhatsNew() else { return }
+        present(controller, animated: true)
     }
 }
