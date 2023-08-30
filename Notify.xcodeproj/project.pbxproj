@@ -17,6 +17,7 @@
 		B47093D42A9F035A00D89804 /* NFGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D32A9F035A00D89804 /* NFGroup.swift */; };
 		B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D72A9F086D00D89804 /* UIView+Extension.swift */; };
 		B47093DA2A9F09E600D89804 /* NFGroupDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */; };
+		B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B47093D32A9F035A00D89804 /* NFGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroup.swift; sourceTree = "<group>"; };
 		B47093D72A9F086D00D89804 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroupDetailHeaderView.swift; sourceTree = "<group>"; };
+		B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTextTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */,
+				B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				B47093CF2A9F02F900D89804 /* NFCreateGroupViewController.swift in Sources */,
 				B47093CD2A9F02EE00D89804 /* NFGroupDetailViewController.swift in Sources */,
 				B47093B92A9F014600D89804 /* AppDelegate.swift in Sources */,
+				B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */,
 				B47093BB2A9F014600D89804 /* SceneDelegate.swift in Sources */,
 				B47093D42A9F035A00D89804 /* NFGroup.swift in Sources */,
 			);

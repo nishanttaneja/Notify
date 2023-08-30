@@ -26,6 +26,9 @@ extension NFGroup {
         ]),
         NFGroup(id: "2", title: "The Psychology of Money", date: .init(timeIntervalSince1970: 9000), items: [
             "Until you make the unconscious conscious, it will direct your life and you will call it fate."
+        ]),
+        NFGroup(id: "3", title: "it will direct your life and you will call it fate", date: .init(timeIntervalSince1970: 9000), items: [
+            "Until you make the unconscious conscious, it will direct your life and you will call it fate."
         ])
     ]
 }

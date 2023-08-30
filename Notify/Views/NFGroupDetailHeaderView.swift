@@ -14,14 +14,11 @@ enum NFGroupDetailHeaderProperty {
 
 protocol NFGroupDetailHeaderViewDelegate: NSObjectProtocol {
     func groupDetailHeaderView(_ headerView: NFGroupDetailHeaderView, didUpdate property: NFGroupDetailHeaderProperty)
-    func heightForTitle(_ text: String, inGroupDetailHeader headerView: NFGroupDetailHeaderView) -> CGFloat
 }
 
 final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     // MARK: - Properties
     weak var delegate: NFGroupDetailHeaderViewDelegate?
-    let defaultTitleHeight: CGFloat = 44
-    private var titleHeightAnchorConstraint: NSLayoutConstraint!
     
     
     // MARK: - Views
@@ -46,13 +43,8 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     func updateGroup(title: String, date: Date) {
         titleTextView.text = title
         datePicker.date = date
-        if let preferredTitleHeight = delegate?.heightForTitle(title, inGroupDetailHeader: self) {
-            titleHeightAnchorConstraint.constant = preferredTitleHeight
-        }
     }
     private func configViews() {
-        titleHeightAnchorConstraint = titleTextView.heightAnchor.constraint(equalToConstant: defaultTitleHeight)
-        titleHeightAnchorConstraint.isActive = true
         titleTextView.delegate = self
         datePicker.datePickerMode = .time
         datePicker.addAction(UIAction(handler: { _ in
@@ -73,7 +65,11 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
 }
 
 extension NFGroupDetailHeaderView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.isScrollEnabled = true
+    }
     func textViewDidEndEditing(_ textView: UITextView) {
+        textView.isScrollEnabled = false
         guard let title = textView.text,
               title.replacingOccurrences(of: " ", with: "").isEmpty == false else { return }
         delegate?.groupDetailHeaderView(self, didUpdate: .title(value: title))
