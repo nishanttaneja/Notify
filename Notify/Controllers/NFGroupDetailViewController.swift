@@ -63,7 +63,7 @@ final class NFGroupDetailViewController: UITableViewController {
         navigationItem.setRightBarButton(saveItem, animated: true)
     }
     private func addNewItem() {
-        updatedGroup.items.insert("", at: .zero)
+        updatedGroup.items.insert(.init(id: UUID().uuidString, title: ""), at: .zero)
         let firstIndexPath = IndexPath(row: .zero, section: .zero)
         tableView.insertRows(at: [firstIndexPath], with: .automatic)
         updateSaveItemIfNeeded()
@@ -133,7 +133,7 @@ extension NFGroupDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         guard let textCell = cell as? NFTextTableViewCell, updatedGroup.items.count > indexPath.row else { return cell }
         textCell.delegate = self
-        textCell.updateText(updatedGroup.items[indexPath.row])
+        textCell.updateText(updatedGroup.items[indexPath.row].title)
         return textCell
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -156,7 +156,7 @@ extension NFGroupDetailViewController {
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard indexPath.row < updatedGroup.items.count else { return UITableView.automaticDimension }
-        return updatedGroup.items[indexPath.row].getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+16
+        return updatedGroup.items[indexPath.row].title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+16
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         updatedGroup.title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+62
@@ -193,9 +193,9 @@ extension NFGroupDetailViewController: NFTextTableViewCellDelegate {
                 return
             }
             if updatedGroup.items.count > index {
-                updatedGroup.items[index] = value
+                updatedGroup.items[index].title = value
             } else {
-                updatedGroup.items.insert(value, at: .zero)
+                updatedGroup.items.insert(.init(id: UUID().uuidString, title: value), at: .zero)
             }
         }
         updateSaveItemIfNeeded()

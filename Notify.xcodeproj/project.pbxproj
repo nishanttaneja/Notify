@@ -13,13 +13,14 @@
 		B47093C22A9F014700D89804 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B47093C12A9F014700D89804 /* Assets.xcassets */; };
 		B47093C52A9F014700D89804 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B47093C32A9F014700D89804 /* LaunchScreen.storyboard */; };
 		B47093CD2A9F02EE00D89804 /* NFGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093CC2A9F02EE00D89804 /* NFGroupDetailViewController.swift */; };
-		B47093CF2A9F02F900D89804 /* NFCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093CE2A9F02F900D89804 /* NFCreateGroupViewController.swift */; };
 		B47093D42A9F035A00D89804 /* NFGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D32A9F035A00D89804 /* NFGroup.swift */; };
 		B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D72A9F086D00D89804 /* UIView+Extension.swift */; };
 		B47093DA2A9F09E600D89804 /* NFGroupDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */; };
 		B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */; };
 		B47093DE2A9F3C3300D89804 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DD2A9F3C3300D89804 /* UITextView+Extension.swift */; };
 		B47093E02A9F3C4100D89804 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DF2A9F3C4100D89804 /* String+Extension.swift */; };
+		B47093E32A9F3CC600D89804 /* NotifyDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B47093E12A9F3CC600D89804 /* NotifyDB.xcdatamodeld */; };
+		B47093E52A9F3F4000D89804 /* NFCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +32,14 @@
 		B47093C42A9F014700D89804 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B47093C62A9F014700D89804 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B47093CC2A9F02EE00D89804 /* NFGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroupDetailViewController.swift; sourceTree = "<group>"; };
-		B47093CE2A9F02F900D89804 /* NFCreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCreateGroupViewController.swift; sourceTree = "<group>"; };
 		B47093D32A9F035A00D89804 /* NFGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroup.swift; sourceTree = "<group>"; };
 		B47093D72A9F086D00D89804 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B47093D92A9F09E600D89804 /* NFGroupDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFGroupDetailHeaderView.swift; sourceTree = "<group>"; };
 		B47093DB2A9F20FA00D89804 /* NFTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTextTableViewCell.swift; sourceTree = "<group>"; };
 		B47093DD2A9F3C3300D89804 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		B47093DF2A9F3C4100D89804 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B47093E22A9F3CC600D89804 /* NotifyDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotifyDB.xcdatamodel; sourceTree = "<group>"; };
+		B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCoreDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +90,6 @@
 			children = (
 				B47093BC2A9F014600D89804 /* NFGroupsViewController.swift */,
 				B47093CC2A9F02EE00D89804 /* NFGroupDetailViewController.swift */,
-				B47093CE2A9F02F900D89804 /* NFCreateGroupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -97,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				B47093D32A9F035A00D89804 /* NFGroup.swift */,
+				B47093E12A9F3CC600D89804 /* NotifyDB.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				B47093D62A9F086500D89804 /* Extensions */,
+				B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -200,12 +203,13 @@
 			files = (
 				B47093DA2A9F09E600D89804 /* NFGroupDetailHeaderView.swift in Sources */,
 				B47093E02A9F3C4100D89804 /* String+Extension.swift in Sources */,
+				B47093E52A9F3F4000D89804 /* NFCoreDataService.swift in Sources */,
 				B47093BD2A9F014600D89804 /* NFGroupsViewController.swift in Sources */,
 				B47093D82A9F086D00D89804 /* UIView+Extension.swift in Sources */,
 				B47093DE2A9F3C3300D89804 /* UITextView+Extension.swift in Sources */,
-				B47093CF2A9F02F900D89804 /* NFCreateGroupViewController.swift in Sources */,
 				B47093CD2A9F02EE00D89804 /* NFGroupDetailViewController.swift in Sources */,
 				B47093B92A9F014600D89804 /* AppDelegate.swift in Sources */,
+				B47093E32A9F3CC600D89804 /* NotifyDB.xcdatamodeld in Sources */,
 				B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */,
 				B47093BB2A9F014600D89804 /* SceneDelegate.swift in Sources */,
 				B47093D42A9F035A00D89804 /* NFGroup.swift in Sources */,
@@ -422,6 +426,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B47093E12A9F3CC600D89804 /* NotifyDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B47093E22A9F3CC600D89804 /* NotifyDB.xcdatamodel */,
+			);
+			currentVersion = B47093E22A9F3CC600D89804 /* NotifyDB.xcdatamodel */;
+			path = NotifyDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B47093AD2A9F014600D89804 /* Project object */;
 }
