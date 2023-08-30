@@ -13,14 +13,24 @@ class NFGroupsViewController: UITableViewController {
     private let cellReuseIdentifier = "default-cell"
     
     
-    // MARK: - Views
-    
-    
-    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configViews()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NFCoreDataService.shared.fetchGroups { result in
+            switch result {
+            case .success(let groups):
+                DispatchQueue.main.async {
+                    self.groups = groups
+                    self.tableView.reloadSections(.init(integer: .zero), with: .automatic)
+                }
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
     }
     
     
@@ -92,12 +102,12 @@ extension NFGroupsViewController {
 // MARK: - DetailsView
 extension NFGroupsViewController: NFGroupDetailViewControllerDelegate {
     func groupDetailViewController(_ viewController: NFGroupDetailViewController, didUpdateDetailsOf group: NFGroup) {
-        if let index = groups.firstIndex(where: { $0.id == group.id }) {
-            groups.remove(at: index)
-            groups.insert(group, at: index)
-        } else {
-            groups.insert(group, at: .zero)
-        }
-        tableView.reloadSections(.init(integer: .zero), with: .automatic)
+//        if let index = groups.firstIndex(where: { $0.id == group.id }) {
+//            groups.remove(at: index)
+//            groups.insert(group, at: index)
+//        } else {
+//            groups.insert(group, at: .zero)
+//        }
+//        tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }

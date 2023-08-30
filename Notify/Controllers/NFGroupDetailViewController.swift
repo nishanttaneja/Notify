@@ -16,11 +16,6 @@ final class NFGroupDetailViewController: UITableViewController {
     private var group: NFGroup
     private let headerReuseIdentifier = "default-header"
     private let cellReuseIdentifier = "default-cell"
-    private var groupHasChanges: Bool = false {
-        willSet {
-            saveItem.isEnabled = newValue
-        }
-    }
     private var updatedGroup: NFGroup
     weak var delegate: NFGroupDetailViewControllerDelegate?
     private var shouldEditTitle: Bool
@@ -28,45 +23,61 @@ final class NFGroupDetailViewController: UITableViewController {
     
     // MARK: - Views
     private let toolbar = UIToolbar()
-    private var saveItem: UIBarButtonItem!
     
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configViews()
+        NFCoreDataService.shared.fetchGroup(havingId: group.id) { result in
+            switch result {
+            case .success(let group):
+                DispatchQueue.main.async {
+                    self.group = group
+                    self.tableView.reloadSections(.init(integer: .zero), with: .automatic)
+                }
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NFCoreDataService.shared.insertGroup(updatedGroup) { result in
+            switch result {
+            case .success: break
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
     }
     
     
     // MARK: - Configurations
     private func configViews() {
-        configNavigationBar()
         configItemsListView()
         configToolbar()
     }
-    private func updateSaveItemIfNeeded() {
-        groupHasChanges = group.title != updatedGroup.title || group.date != updatedGroup.date || group.items != updatedGroup.items || updatedGroup.alerts != group.alerts
-    }
     private func performSaveAction() {
-        guard groupHasChanges else { return }
-        group = updatedGroup
-        groupHasChanges = false
-        delegate?.groupDetailViewController(self, didUpdateDetailsOf: group)
-        tableView.reloadSections(.init(integer: .zero), with: .automatic)
-        navigationController?.popViewController(animated: true)
-    }
-    private func configNavigationBar() {
-        saveItem = UIBarButtonItem(title: "Save", primaryAction: UIAction(handler: { _ in
-            self.performSaveAction()
-        }))
-        saveItem.isEnabled = false
-        navigationItem.setRightBarButton(saveItem, animated: true)
+        NFCoreDataService.shared.insertGroup(updatedGroup) { result in
+            switch result {
+            case .success(let group):
+                DispatchQueue.main.async {
+                    self.group = group
+                    self.delegate?.groupDetailViewController(self, didUpdateDetailsOf: group)
+                    self.tableView.reloadSections(.init(integer: .zero), with: .automatic)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
     }
     private func addNewItem() {
-        updatedGroup.items.insert(.init(id: UUID().uuidString, title: ""), at: .zero)
+        let newItem = NFGroupItem(id: UUID().uuidString, title: "")
+        updatedGroup.items.insert(newItem, at: .zero)
         let firstIndexPath = IndexPath(row: .zero, section: .zero)
         tableView.insertRows(at: [firstIndexPath], with: .automatic)
-        updateSaveItemIfNeeded()
         guard let textCell = tableView.cellForRow(at: firstIndexPath) as? NFTextTableViewCell else { return }
         textCell.textView.becomeFirstResponder()
     }
@@ -142,8 +153,14 @@ extension NFGroupDetailViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         guard updatedGroup.items.count > indexPath.row else { return }
-        updatedGroup.items.remove(at: indexPath.row)
-        updateSaveItemIfNeeded()
+        let item = updatedGroup.items.remove(at: indexPath.row)
+        NFCoreDataService.shared.deleteGroupItem(item) { result in
+            switch result {
+            case .success: break
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -175,7 +192,6 @@ extension NFGroupDetailViewController: NFGroupDetailHeaderViewDelegate {
         case .alerts(let value):
             updatedGroup.alerts = value
         }
-        updateSaveItemIfNeeded()
         tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }
@@ -192,13 +208,22 @@ extension NFGroupDetailViewController: NFTextTableViewCellDelegate {
                 tableView.deleteRows(at: [.init(row: .zero, section: .zero)], with: .automatic)
                 return
             }
+            let newItem: NFGroupItem
             if updatedGroup.items.count > index {
                 updatedGroup.items[index].title = value
+                newItem = updatedGroup.items[index]
             } else {
-                updatedGroup.items.insert(.init(id: UUID().uuidString, title: value), at: .zero)
+                newItem = .init(id: UUID().uuidString, title: value)
+                updatedGroup.items.insert(newItem, at: .zero)
+            }
+            NFCoreDataService.shared.insertGroupItem(newItem, inGroupHavingId: updatedGroup.id) { result in
+                switch result {
+                case .success: break
+                case .failure(let failure):
+                    debugPrint(#function, failure)
+                }
             }
         }
-        updateSaveItemIfNeeded()
         tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }
