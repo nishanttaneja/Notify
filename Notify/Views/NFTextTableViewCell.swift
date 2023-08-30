@@ -21,7 +21,7 @@ final class NFTextTableViewCell: UITableViewCell {
     
     
     // MARK: - Views
-    private let textView: UITextView = {
+    let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = .systemFont(ofSize: 17)
@@ -55,8 +55,7 @@ extension NFTextTableViewCell: UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.isScrollEnabled = false
-        guard let text = textView.text,
-              text.replacingOccurrences(of: " ", with: "").isEmpty == false else { return }
+        guard let text = textView.text else { return }
         delegate?.textTableViewCell(self, didUpdate: .title(value: text))
     }
 }

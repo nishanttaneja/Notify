@@ -55,11 +55,19 @@ final class NFGroupDetailViewController: UITableViewController {
         saveItem.isEnabled = false
         navigationItem.setRightBarButton(saveItem, animated: true)
     }
+    private func addNewItem() {
+        updatedGroup.items.insert("", at: .zero)
+        let firstIndexPath = IndexPath(row: .zero, section: .zero)
+        tableView.insertRows(at: [firstIndexPath], with: .automatic)
+        updateSaveItemIfNeeded()
+        guard let textCell = tableView.cellForRow(at: firstIndexPath) as? NFTextTableViewCell else { return }
+        textCell.textView.becomeFirstResponder()
+    }
     private func configToolbar() {
         toolbarItems = [
             UIBarButtonItem(systemItem: .flexibleSpace),
             UIBarButtonItem(title: "Add Item", primaryAction: UIAction(handler: { _ in
-                debugPrint("start typing...")
+                self.addNewItem()
             })),
             UIBarButtonItem(systemItem: .flexibleSpace),
         ]
@@ -157,6 +165,11 @@ extension NFGroupDetailViewController: NFTextTableViewCellDelegate {
         guard let index = tableView.indexPath(for: cell)?.row else { return }
         switch property {
         case .title(let value):
+            guard value.replacingOccurrences(of: " ", with: "").isEmpty == false else {
+                updatedGroup.items.remove(at: .zero)
+                tableView.deleteRows(at: [.init(row: .zero, section: .zero)], with: .automatic)
+                return
+            }
             if updatedGroup.items.count > index {
                 updatedGroup.items[index] = value
             } else {
