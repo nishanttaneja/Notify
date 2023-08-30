@@ -178,7 +178,7 @@ extension NFCoreDataService {
 // MARK: - AtomicHabits
 extension NFCoreDataService {
     func saveAtomicHabits() {
-        let atomicHabits = NFGroup(id: "14B8239B-394F-4BCD-ADD3-22CF9933C15E", title: "Atomic Habits", date: .now, items: [
+        let atomicHabits = NFGroup(id: "14B8239B-394F-4BCD-ADD3-22CF9933C15E", title: "Atomic Habits", date: .now, alerts: true, items: [
             NFGroupItem(id: "8F66B564-ED25-49E8-BF27-A5DCBB9E67E6", title: "Habits are the compound interest of self-improvement. Getting 1 percent better everyday counts for a lot in the long-run."),
             NFGroupItem(id: "67849067-F8BB-4F22-94FF-D94BED780841", title: "Habits are a double-edged sword. They can work for you or against you, which is why understanding the details is essential."),
             NFGroupItem(id: "75B45699-9CEF-4850-88E3-FAF6C291EB85", title: "Small changes often appear to make no difference until you cross a critical threshold. The most powerful outcomes of any compounding process are delayed. You need to be patient."),

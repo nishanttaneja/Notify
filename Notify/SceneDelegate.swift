@@ -15,7 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let groupsVC = NFGroupsViewController()
-        NFCoreDataService.shared.saveAtomicHabits()
         window?.rootViewController = UINavigationController(rootViewController: groupsVC)
         window?.makeKeyAndVisible()
     }

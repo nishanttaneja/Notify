@@ -118,6 +118,7 @@ extension NFGroupsViewController {
             WNItem(image: .init(systemName: "newspaper")!, title: "What's New", description: "Discover new features. When new features are added, they will be displayed here.")
         ], appVersion: appVersion)
         guard controller.shouldDisplayWhatsNew() else { return }
+        NFCoreDataService.shared.saveAtomicHabits()
         present(controller, animated: true)
     }
 }
