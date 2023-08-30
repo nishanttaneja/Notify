@@ -11,6 +11,7 @@ struct NFGroup {
     let id: String
     var title: String
     var date: Date
+    var alerts: Bool = false
     var items: [String]
 }
 

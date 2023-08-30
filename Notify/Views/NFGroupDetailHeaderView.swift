@@ -10,6 +10,7 @@ import UIKit
 enum NFGroupDetailHeaderProperty {
     case title(value: String)
     case date(value: Date)
+    case alerts(value: Bool)
 }
 
 protocol NFGroupDetailHeaderViewDelegate: NSObjectProtocol {
@@ -30,11 +31,23 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
         return textView
     }()
     private let datePicker = UIDatePicker()
+    private let notificationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Alerts"
+        return label
+    }()
+    private let notificationSwitch = UISwitch()
+    private lazy var notificationStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [notificationLabel, notificationSwitch])
+        stackView.spacing = 8
+        return stackView
+    }()
     private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleTextView, datePicker])
+        let dateStackView = UIStackView(arrangedSubviews: [datePicker, .init(), .init(), notificationStackView])
+        dateStackView.distribution = .equalCentering
+        let stackView = UIStackView(arrangedSubviews: [titleTextView, dateStackView])
         titleTextView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         stackView.axis = .vertical
-        stackView.alignment = .leading
         return stackView
     }()
     
@@ -49,6 +62,9 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
         datePicker.datePickerMode = .time
         datePicker.addAction(UIAction(handler: { _ in
             self.delegate?.groupDetailHeaderView(self, didUpdate: .date(value: self.datePicker.date))
+        }), for: .valueChanged)
+        notificationSwitch.addAction(UIAction(handler: { _ in
+            self.delegate?.groupDetailHeaderView(self, didUpdate: .alerts(value: self.notificationSwitch.isOn))
         }), for: .valueChanged)
         contentView.addSubview(contentStackView, withInsets: .init(top: .zero, left: .zero, bottom: 16, right: .zero))
     }

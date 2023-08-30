@@ -39,7 +39,7 @@ final class NFGroupDetailViewController: UITableViewController {
         configToolbar()
     }
     private func updateSaveItemIfNeeded() {
-        groupHasChanges = group.title != updatedGroup.title || group.date != updatedGroup.date || group.items != updatedGroup.items
+        groupHasChanges = group.title != updatedGroup.title || group.date != updatedGroup.date || group.items != updatedGroup.items || updatedGroup.alerts != group.alerts
     }
     private func performSaveAction() {
         guard groupHasChanges else { return }
@@ -142,6 +142,8 @@ extension NFGroupDetailViewController: NFGroupDetailHeaderViewDelegate {
             updatedGroup.title = value
         case .date(let value):
             updatedGroup.date = value
+        case .alerts(let value):
+            updatedGroup.alerts = value
         }
         updateSaveItemIfNeeded()
         tableView.reloadData()
