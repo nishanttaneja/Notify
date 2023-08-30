@@ -9,10 +9,12 @@ import Foundation
 
 struct NFGroup {
     let id: String
-    let title: String
-    let date: Date
-    let items: [String]
+    var title: String
+    var date: Date
+    var items: [String]
 }
+
+extension NFGroup: Equatable { }
 
 extension NFGroup {
     static let mockData: [NFGroup] = [
