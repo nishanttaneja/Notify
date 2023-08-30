@@ -118,7 +118,17 @@ extension NFGroupsViewController {
             WNItem(image: .init(systemName: "newspaper")!, title: "What's New", description: "Discover new features. When new features are added, they will be displayed here.")
         ], appVersion: appVersion)
         guard controller.shouldDisplayWhatsNew() else { return }
-        NFCoreDataService.shared.saveAtomicHabits()
+        NFCoreDataService.shared.saveAtomicHabits { result in
+            switch result {
+            case .success(let group):
+                DispatchQueue.main.async {
+                    self.groups.insert(group, at: .zero)
+                    self.tableView.reloadSections(.init(integer: .zero), with: .automatic)
+                }
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
         present(controller, animated: true)
     }
 }

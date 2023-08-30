@@ -39,9 +39,16 @@ final class NFGroupDetailViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let group, group.alerts,
-           let title = group.title, let id = group.groupId, let date = group.date, let message = (group.items?.array.randomElement() as? NFCDGroupItem)?.title {
-            NFNotificationManager.shared.setReminder(id: id, title: title, message: message, date: date)
+           let id = group.groupId, let title = group.title, let date = group.date {
+            let items: [NFGroupItem] = (group.items?.array as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
+                guard let id = savedItem.itemId, let title = savedItem.title else { return nil }
+                return NFGroupItem(id: id, title: title)
+            })
+            let group = NFGroup(id: id, title: title, date: date, alerts: group.alerts, items: items)
+            NFNotificationManager.shared.scheduledRecurringRandomNotifications(forGroup: group)
         }
+        
+        
         NFCoreDataService.shared.saveData { result in
             switch result {
             case .success: break

@@ -177,7 +177,7 @@ extension NFCoreDataService {
 
 // MARK: - AtomicHabits
 extension NFCoreDataService {
-    func saveAtomicHabits() {
+    func saveAtomicHabits(completionHandler: @escaping (_ result: Result<NFGroup, Error>) -> Void) {
         let atomicHabits = NFGroup(id: "14B8239B-394F-4BCD-ADD3-22CF9933C15E", title: "Atomic Habits", date: .now, alerts: true, items: [
             NFGroupItem(id: "8F66B564-ED25-49E8-BF27-A5DCBB9E67E6", title: "Habits are the compound interest of self-improvement. Getting 1 percent better everyday counts for a lot in the long-run."),
             NFGroupItem(id: "67849067-F8BB-4F22-94FF-D94BED780841", title: "Habits are a double-edged sword. They can work for you or against you, which is why understanding the details is essential."),
@@ -256,12 +256,8 @@ extension NFCoreDataService {
             NFGroupItem(id: "B65DD655-E5C2-4735-85B7-E7D42C8B1129", title: "Anyone can work hard when they feel motivated. It’s the ability to keep going when work isn’t exciting that makes the difference."),
             NFGroupItem(id: "96BB17E0-0193-40C8-BC36-A35A9B23DD2A", title: "Professionals stick to the schedule; amateurs let life get in the way."),
             NFGroupItem(id: "6BD77E01-81E3-4002-85E8-7AECA41A761C", title: "A lack of self-awareness is poison. Reflection and review is the antidote."),
-            NFGroupItem(id: "99F089FC-9F03-43AC-A1E1-36103E64288C", title: "The tighter we cling to an identity, the harder it becomes to grow beyond it."),
-            NFGroupItem(id: "109E1AC8-C722-4B52-B6A6-A39334BDF033", title: "Habits are the compound interest of self-improvement. Getting 1 percent better everyday counts for a lot in the long-run."),
-            NFGroupItem(id: "44FA6102-B91E-444B-8A42-3252AB3188AD", title: "Habits are a double-edged sword. They can work for you or against you, which is why understanding is details is essential."),
-            NFGroupItem(id: "5A0D512E-AC04-4F56-B15A-07621CF3C657", title: "Small changes often appear to make no difference until you cross a critical threshold. The most powerful outcomes of any compounding process are delayed. You need to be patient."),
-            NFGroupItem(id: "6256B2FF-7328-4193-ADAD-A2E4EFFF873C", title: "You do not rise to the level of your goals. You fall to the level of your systems."),
+            NFGroupItem(id: "99F089FC-9F03-43AC-A1E1-36103E64288C", title: "The tighter we cling to an identity, the harder it becomes to grow beyond it.")
         ])
-        insertGroup(atomicHabits) { _ in }
+        insertGroup(atomicHabits, completionHandler: completionHandler)
     }
 }
