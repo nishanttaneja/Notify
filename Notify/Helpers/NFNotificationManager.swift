@@ -18,10 +18,10 @@ final class NFNotificationManager {
             }
         }
     }
-    func setReminder(id: String, date: Date, message: String) {
+    func setReminder(id: String, title: String, message: String, date: Date) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "Notify"
+        notificationContent.title = title
         notificationContent.body = message
         notificationContent.sound = .default
         let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute, .second], from: date), repeats: true)
