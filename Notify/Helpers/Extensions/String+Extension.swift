@@ -8,7 +8,7 @@
 import UIKit
 
 extension String {
-    func getEstimatedHeight(inTargetWidth targetWidth: CGFloat, havingInsets insets: UIEdgeInsets, font: UIFont = .systemFont(ofSize: 18)) -> CGFloat {
+    func getEstimatedHeight(inTargetWidth targetWidth: CGFloat, havingInsets insets: UIEdgeInsets, font: UIFont = .systemFont(ofSize: 17)) -> CGFloat {
         var estimatedHeight: CGFloat = .zero
         estimatedHeight += insets.top + insets.bottom
         var estimatedWidth = targetWidth

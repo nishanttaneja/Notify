@@ -47,7 +47,6 @@ class NFGroupsViewController: UITableViewController {
         title = "Groups"
         navigationItem.setRightBarButton(UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { _ in
             let newGroupVC = NFGroupDetailViewController()
-            newGroupVC.delegate = self
             self.navigationController?.pushViewController(newGroupVC, animated: true)
         })), animated: true)
     }
@@ -85,7 +84,14 @@ extension NFGroupsViewController {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete, groups.count > indexPath.row else { return }
-        groups.remove(at: indexPath.row)
+        let groupToDelete = groups.remove(at: indexPath.row)
+        NFCoreDataService.shared.deleteGroup(groupToDelete) { result in
+            switch result {
+            case .success: break
+            case .failure(let failure):
+                debugPrint(#function, failure)
+            }
+        }
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -94,24 +100,9 @@ extension NFGroupsViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         guard groups.count > indexPath.row else { return }
         let detailsVC = NFGroupDetailViewController(groupId: groups[indexPath.row].id)
-        detailsVC.delegate = self
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .delete
-    }
-}
-
-
-// MARK: - DetailsView
-extension NFGroupsViewController: NFGroupDetailViewControllerDelegate {
-    func groupDetailViewController(_ viewController: NFGroupDetailViewController, didUpdateDetailsOf group: NFGroup) {
-//        if let index = groups.firstIndex(where: { $0.id == group.id }) {
-//            groups.remove(at: index)
-//            groups.insert(group, at: index)
-//        } else {
-//            groups.insert(group, at: .zero)
-//        }
-//        tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }
 }

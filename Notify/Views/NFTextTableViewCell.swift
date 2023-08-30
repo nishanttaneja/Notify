@@ -35,6 +35,7 @@ final class NFTextTableViewCell: UITableViewCell {
         textView.text = text
     }
     private func configViews() {
+        textView.isScrollEnabled = false
         textView.delegate = self
         contentView.addSubview(textView, withInsets: .init(top: 4, left: 16, bottom: 4, right: 16))
     }

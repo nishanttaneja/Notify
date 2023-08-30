@@ -60,6 +60,7 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
         notificationSwitch.setOn(alerts, animated: true)
     }
     private func configViews() {
+        titleTextView.isScrollEnabled = false
         titleTextView.delegate = self
         datePicker.datePickerMode = .time
         datePicker.addAction(UIAction(handler: { _ in

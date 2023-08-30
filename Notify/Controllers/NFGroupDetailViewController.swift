@@ -7,17 +7,12 @@
 
 import UIKit
 
-protocol NFGroupDetailViewControllerDelegate: NSObjectProtocol {
-    func groupDetailViewController(_ viewController: NFGroupDetailViewController, didUpdateDetailsOf group: NFGroup)
-}
-
 final class NFGroupDetailViewController: UITableViewController {
     // MARK: - Properties
     private let groupId: String
     private var group: NFCDGroup?
     private let headerReuseIdentifier = "default-header"
     private let cellReuseIdentifier = "default-cell"
-    weak var delegate: NFGroupDetailViewControllerDelegate?
     private var shouldEditTitle: Bool
     
     
@@ -62,6 +57,7 @@ final class NFGroupDetailViewController: UITableViewController {
         configToolbar()
     }
     private func addNewItem() {
+        tableView.scrollToRow(at: .init(row: .zero, section: .zero), at: .top, animated: false)
         let newItem = NFCoreDataService.shared.createNewGroupItem()
         group?.insertIntoItems(newItem, at: .zero)
         let firstIndexPath = IndexPath(row: .zero, section: .zero)
@@ -156,7 +152,7 @@ extension NFGroupDetailViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let group, let items = group.items?.array as? [NFCDGroupItem],
               indexPath.row < items.count, let title = items[indexPath.row].title else { return UITableView.automaticDimension }
-        return title.getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+16
+        return title.getEstimatedHeight(inTargetWidth: tableView.frame.width-44, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+18
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         (group?.title ?? "").getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+62
