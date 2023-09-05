@@ -47,7 +47,7 @@ final class NFGroupDetailHeaderView: UITableViewHeaderFooterView {
     private lazy var contentStackView: UIStackView = {
         let dateStackView = UIStackView(arrangedSubviews: [datePicker, .init(), .init(), notificationStackView])
         dateStackView.distribution = .equalCentering
-        let stackView = UIStackView(arrangedSubviews: [titleTextView, dateStackView])
+        let stackView = UIStackView(arrangedSubviews: [titleTextView])//, dateStackView])
         titleTextView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         stackView.axis = .vertical
         return stackView

@@ -38,17 +38,6 @@ final class NFGroupDetailViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let group, group.alerts,
-           let id = group.groupId, let title = group.title, let date = group.date {
-            let items: [NFGroupItem] = (group.items?.array as? [NFCDGroupItem] ?? []).compactMap({ savedItem in
-                guard let id = savedItem.itemId, let title = savedItem.title else { return nil }
-                return NFGroupItem(id: id, title: title)
-            })
-            let group = NFGroup(id: id, title: title, date: date, alerts: group.alerts, repeatType: .init(rawValue: group.repeatTimeInterval) ?? .daily, items: items)
-//            NFNotificationManager.shared.scheduledRecurringRandomNotifications(forGroup: group)
-        }
-        
-        
         NFCoreDataService.shared.saveData { result in
             switch result {
             case .success: break
@@ -165,7 +154,7 @@ extension NFGroupDetailViewController {
         return title.getEstimatedHeight(inTargetWidth: tableView.frame.width-44, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16))+18
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        (group?.title ?? "").getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+62
+        (group?.title ?? "").getEstimatedHeight(inTargetWidth: tableView.frame.width-40, havingInsets: .init(top: 4, left: 16, bottom: 4, right: 16), font: .boldSystemFont(ofSize: 28))+26//+36
     }
 }
 
