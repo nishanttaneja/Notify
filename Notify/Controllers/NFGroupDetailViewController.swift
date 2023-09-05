@@ -44,8 +44,8 @@ final class NFGroupDetailViewController: UITableViewController {
                 guard let id = savedItem.itemId, let title = savedItem.title else { return nil }
                 return NFGroupItem(id: id, title: title)
             })
-            let group = NFGroup(id: id, title: title, date: date, alerts: group.alerts, items: items)
-            NFNotificationManager.shared.scheduledRecurringRandomNotifications(forGroup: group)
+            let group = NFGroup(id: id, title: title, date: date, alerts: group.alerts, repeatType: .init(rawValue: group.repeatTimeInterval) ?? .daily, items: items)
+//            NFNotificationManager.shared.scheduledRecurringRandomNotifications(forGroup: group)
         }
         
         
@@ -180,6 +180,8 @@ extension NFGroupDetailViewController: NFGroupDetailHeaderViewDelegate {
             group?.date = value
         case .alerts(let value):
             group?.alerts = value
+        case .repeatTimeInterval(let value):
+            group?.repeatTimeInterval = value
         }
         tableView.reloadSections(.init(integer: .zero), with: .automatic)
     }

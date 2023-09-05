@@ -7,6 +7,8 @@
 
 import UIKit
 import WhatsNew
+import UserNotifications
+import Intents
 
 class NFGroupsViewController: UITableViewController {
     // MARK: - Properties
@@ -37,6 +39,24 @@ class NFGroupsViewController: UITableViewController {
         super.viewDidAppear(animated)
         NFNotificationManager.shared.requestNotificationAuthorisation()
         displayWhatsNew()
+        
+        INPreferences.requestSiriAuthorization { status in
+            switch status {
+            case .authorized:
+                debugPrint("Siri Usage Request Authorised!")
+            default:
+                debugPrint("Siri Usage Request Rejected.")
+            }
+        }
+        
+        let intent = RandomQuoteIntent()
+        intent.suggestedInvocationPhrase = "Get Random Quote from "
+        intent.group = "group"
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate { error in
+            guard let error else { return }
+            debugPrint(error)
+        }
     }
     
     

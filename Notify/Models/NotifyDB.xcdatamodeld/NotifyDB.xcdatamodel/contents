@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="NFCDGroup" representedClassName="NFCDGroup" syncable="YES">
-        <attribute name="alerts" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="alerts" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="groupId" attributeType="String"/>
+        <attribute name="repeatTimeInterval" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="NFCDGroupItem" inverseName="group" inverseEntity="NFCDGroupItem"/>
         <uniquenessConstraints>

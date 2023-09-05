@@ -11,6 +11,7 @@ enum NFGroupDetailHeaderProperty {
     case title(value: String)
     case date(value: Date)
     case alerts(value: Bool)
+    case repeatTimeInterval(value: TimeInterval)
 }
 
 protocol NFGroupDetailHeaderViewDelegate: NSObjectProtocol {

@@ -2,7 +2,7 @@
 //  NFCDGroup+CoreDataProperties.swift
 //  Notify
 //
-//  Created by Nishant Taneja on 30/08/23.
+//  Created by Nishant Taneja on 01/09/23.
 //
 //
 
@@ -20,6 +20,7 @@ extension NFCDGroup {
     @NSManaged public var date: Date?
     @NSManaged public var groupId: String?
     @NSManaged public var title: String?
+    @NSManaged public var repeatTimeInterval: Double
     @NSManaged public var items: NSOrderedSet?
 
 }
