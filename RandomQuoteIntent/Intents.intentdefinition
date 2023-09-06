@@ -30,7 +30,7 @@
 			<key>INIntentKeyParameter</key>
 			<string>group</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
 				<key>group</key>
@@ -38,7 +38,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>${group}</string>
+					<string>Get Random Quote from ${group}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>dEfT7l</string>
 					<key>INIntentParameterCombinationUpdatesLinked</key>
@@ -54,7 +54,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>Random Quote</string>
+					<string>Get Random Quote from ${group}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>8ofQcn</string>
 				</dict>
@@ -65,7 +65,7 @@
 					<key>INIntentParameterConfigurable</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
-					<string>Enter Group Title</string>
+					<string>Group Title</string>
 					<key>INIntentParameterDisplayNameID</key>
 					<string>xXkIXq</string>
 					<key>INIntentParameterDisplayPriority</key>
@@ -73,11 +73,11 @@
 					<key>INIntentParameterMetadata</key>
 					<dict>
 						<key>INIntentParameterMetadataCapitalization</key>
-						<string>Words</string>
+						<string>Sentences</string>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<string>Atomic Habits</string>
 						<key>INIntentParameterMetadataDefaultValueID</key>
-						<string>x8ZOUT</string>
-						<key>INIntentParameterMetadataDisableAutocorrect</key>
-						<true/>
+						<string>VECdre</string>
 					</dict>
 					<key>INIntentParameterName</key>
 					<string>group</string>
@@ -99,29 +99,9 @@
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
 						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>ok</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>ZnhaBt</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>aUD15Q</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
-						</dict>
 					</array>
 					<key>INIntentParameterTag</key>
-					<integer>1</integer>
+					<integer>3</integer>
 					<key>INIntentParameterType</key>
 					<string>String</string>
 				</dict>
