@@ -50,7 +50,7 @@ class NFGroupsViewController: UITableViewController {
         }
         
         let intent = RandomQuoteIntent()
-        intent.suggestedInvocationPhrase = "Get Random Quote from "
+        intent.suggestedInvocationPhrase = "Get random quote."
         intent.group = "group"
         let interaction = INInteraction(intent: intent, response: nil)
         interaction.donate { error in

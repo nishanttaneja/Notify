@@ -51,6 +51,10 @@
 			<dict>
 				<key>group</key>
 				<dict>
+					<key>INIntentParameterCombinationSubtitle</key>
+					<string>asdsadds dasdasd</string>
+					<key>INIntentParameterCombinationSubtitleID</key>
+					<string>Oc7AnD</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
