@@ -514,7 +514,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notify/Notify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8FMR94R94;
+				DEVELOPMENT_TEAM = 4YZDJM5F99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Notify/Info.plist;
 				INFOPLIST_KEY_NSRemindersUsageDescription = Hello;
@@ -527,8 +527,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciffer.Notify;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unkn0wny3t-ios.notify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -548,7 +548,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notify/Notify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8FMR94R94;
+				DEVELOPMENT_TEAM = 4YZDJM5F99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Notify/Info.plist;
 				INFOPLIST_KEY_NSRemindersUsageDescription = Hello;
@@ -561,8 +561,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciffer.Notify;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unkn0wny3t-ios.notify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -579,7 +579,7 @@
 				CODE_SIGN_ENTITLEMENTS = RandomQuoteIntent/RandomQuoteIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8FMR94R94;
+				DEVELOPMENT_TEAM = 4YZDJM5F99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RandomQuoteIntent/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RandomQuoteIntent;
@@ -590,7 +590,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciffer.Notify.RandomQuoteIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unkn0wny3t-ios.notify.RandomQuoteIntent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -605,7 +605,7 @@
 				CODE_SIGN_ENTITLEMENTS = RandomQuoteIntent/RandomQuoteIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8FMR94R94;
+				DEVELOPMENT_TEAM = 4YZDJM5F99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RandomQuoteIntent/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RandomQuoteIntent;
@@ -616,7 +616,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sciffer.Notify.RandomQuoteIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unkn0wny3t-ios.notify.RandomQuoteIntent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

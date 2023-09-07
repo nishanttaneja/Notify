@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "whatsnew",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nishanttaneja/WhatsNew",
+      "state" : {
+        "branch" : "main",
+        "revision" : "56aa5f1b05140671b07b819bd19c3291d14a834b"
+      }
+    }
+  ],
+  "version" : 2
+}
