@@ -9,11 +9,11 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>AiVuCi</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>22G90</string>
+	<string>23A5337a</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>14E300c</string>
+	<string>15A5229m</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>14.3.1</string>
+	<string>15.0</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -21,6 +21,8 @@
 			<string>generic</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDefaultImageName</key>
+			<string>logo</string>
 			<key>INIntentDescription</key>
 			<string>Fetches random quote</string>
 			<key>INIntentDescriptionID</key>
@@ -51,10 +53,6 @@
 			<dict>
 				<key>group</key>
 				<dict>
-					<key>INIntentParameterCombinationSubtitle</key>
-					<string>asdsadds dasdasd</string>
-					<key>INIntentParameterCombinationSubtitleID</key>
-					<string>Oc7AnD</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
