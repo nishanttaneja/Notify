@@ -22,6 +22,7 @@
 		B47093E02A9F3C4100D89804 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093DF2A9F3C4100D89804 /* String+Extension.swift */; };
 		B47093E32A9F3CC600D89804 /* NotifyDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B47093E12A9F3CC600D89804 /* NotifyDB.xcdatamodeld */; };
 		B47093E52A9F3F4000D89804 /* NFCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */; };
+		B4990EA52AAF409D00FC8088 /* NFMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4990EA42AAF409D00FC8088 /* NFMessageViewController.swift */; };
 		B4C5AE082AA79E4B00711C9F /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C5AE072AA79E4B00711C9F /* Intents.framework */; };
 		B4C5AE0B2AA79E4B00711C9F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5AE0A2AA79E4B00711C9F /* IntentHandler.swift */; };
 		B4C5AE0F2AA79E4B00711C9F /* RandomQuoteIntent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B4C5AE052AA79E4B00711C9F /* RandomQuoteIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -83,6 +84,7 @@
 		B47093DF2A9F3C4100D89804 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B47093E22A9F3CC600D89804 /* NotifyDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotifyDB.xcdatamodel; sourceTree = "<group>"; };
 		B47093E42A9F3F4000D89804 /* NFCoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCoreDataService.swift; sourceTree = "<group>"; };
+		B4990EA42AAF409D00FC8088 /* NFMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFMessageViewController.swift; sourceTree = "<group>"; };
 		B4C5AE002AA79DEB00711C9F /* Notify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notify.entitlements; sourceTree = "<group>"; };
 		B4C5AE052AA79E4B00711C9F /* RandomQuoteIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RandomQuoteIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C5AE072AA79E4B00711C9F /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -159,6 +161,7 @@
 			children = (
 				B47093BC2A9F014600D89804 /* NFGroupsViewController.swift */,
 				B47093CC2A9F02EE00D89804 /* NFGroupDetailViewController.swift */,
+				B4990EA42AAF409D00FC8088 /* NFMessageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				B4F2E2592A9F49FF009A7892 /* NFCDGroup+CoreDataClass.swift in Sources */,
 				B4C5AE162AA79E5B00711C9F /* Intents.intentdefinition in Sources */,
 				B47093B92A9F014600D89804 /* AppDelegate.swift in Sources */,
+				B4990EA52AAF409D00FC8088 /* NFMessageViewController.swift in Sources */,
 				B47093E32A9F3CC600D89804 /* NotifyDB.xcdatamodeld in Sources */,
 				B47093DC2A9F20FA00D89804 /* NFTextTableViewCell.swift in Sources */,
 				B47093BB2A9F014600D89804 /* SceneDelegate.swift in Sources */,
@@ -530,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.unkn0wny3t-ios.notify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -567,7 +571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.unkn0wny3t-ios.notify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

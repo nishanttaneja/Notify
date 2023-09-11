@@ -65,12 +65,21 @@ final class NFGroupDetailViewController: UITableViewController {
         textCell.textView.becomeFirstResponder()
     }
     private func configToolbar() {
+        let sendRandomQuoteButtonItem = UIBarButtonItem(title: "Show Random Quote", primaryAction: UIAction(handler: { _ in
+            guard let id = self.group?.groupId,
+                  let title = self.group?.title,
+                  let message = (self.group?.items?.set.randomElement() as? NFCDGroupItem)?.title else { return }
+//            NFNotificationManager.shared.sendRandomNotification(id: id, title: title, message: message)
+            let messageVC = NFMessageViewController(title: title, message: message)
+            self.navigationController?.present(messageVC, animated: true)
+        }))
         toolbarItems = [
             UIBarButtonItem(systemItem: .flexibleSpace),
-            UIBarButtonItem(title: "Add Item", primaryAction: UIAction(handler: { _ in
+            sendRandomQuoteButtonItem,
+            UIBarButtonItem(systemItem: .flexibleSpace),
+            UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { _ in
                 self.addNewItem()
             })),
-            UIBarButtonItem(systemItem: .flexibleSpace),
         ]
         navigationController?.setToolbarHidden(false, animated: true)
     }
